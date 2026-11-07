@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --ink: #11110f;
+  --ink-2: #171714;
+  --cream: #efe7d7;
+  --warm: #d3b37a;
+  --gold: #b98a3e;
+  --muted: #a99f91;
+  --line: rgba(211,179,122,.24);
+  --white: #f7f4ed;
+  --shadow: 0 18px 55px rgba(0,0,0,.32);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  background: var(--ink);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; }
+button, input, textarea { font: inherit; }
+
+.container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+/* Shared top navigation */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(12,12,10,.72);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.nav {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 38px; height: 38px; border: 1px solid var(--gold); border-radius: 50%;
+  display: grid; place-items: center; color: var(--warm); font-weight: 700; letter-spacing: 1px;
+}
+.brand-wordmark { font-weight: 700; letter-spacing: .18em; font-size: .88rem; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a {
+  color: #d8d0c2; font-size: .88rem; font-weight: 600; position: relative; padding: 7px 0;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+  background: var(--warm); transform: scaleX(0); transform-origin: center; transition: transform .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-cta {
+  padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--white);
+  background: rgba(185,138,62,.10); font-size: .82rem; font-weight: 700;
+}
+.menu-btn { display: none; border: 1px solid var(--line); background: transparent; color: var(--white); border-radius: 10px; padding: 10px 12px; }
+
+/* Typography */
+.eyebrow { color: var(--warm); text-transform: uppercase; letter-spacing: .2em; font-size: .72rem; font-weight: 700; }
+h1, h2, h3 { margin: 0; font-family: 'Playfair Display', serif; line-height: 1.1; }
+h1 { font-size: clamp(3.1rem, 7vw, 6.4rem); letter-spacing: -.03em; }
+h2 { font-size: clamp(2.2rem, 4vw, 4rem); }
+h3 { font-size: 1.55rem; }
+.lead { color: #d4ccbe; max-width: 650px; font-size: 1.02rem; }
+
+/* Home */
+.hero {
+  min-height: 100vh;
+  padding-top: 78px;
+  display: grid;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+  background: #0b0b09;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(8,8,7,.85) 0%, rgba(8,8,7,.48) 48%, rgba(8,8,7,.08) 100%),
+              linear-gradient(0deg, rgba(8,8,7,.8) 0%, transparent 42%);
+  z-index: 1;
+}
+.hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 67% center; }
+.hero-content { position: relative; z-index: 2; padding: 82px 0 88px; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: end; }
+.hero-copy { max-width: 780px; }
+.hero-copy h1 { margin-top: 14px; max-width: 720px; }
+.hero-copy .lead { margin: 24px 0 30px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 18px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
+.btn-primary { background: var(--warm); color: #171510; }
+.btn-secondary { border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.22); color: var(--white); }
+.hero-note { justify-self: end; width: min(340px,100%); padding: 18px; background: rgba(11,11,9,.62); border: 1px solid rgba(211,179,122,.18); backdrop-filter: blur(10px); }
+.hero-note strong { font-size: 1.1rem; }
+
+.section { padding: 100px 0; }
+.section-cream { background: var(--cream); color: var(--ink); }
+.section-dark { background: var(--ink-2); }
+.section-head { display:flex; justify-content:space-between; align-items:flex-end; gap:25px; margin-bottom:36px; }
+.section-head p { max-width: 580px; color: #6f675b; }
+.section-dark .section-head p { color: var(--muted); }
+
+.split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+.media-frame { overflow:hidden; border-radius: 4px; box-shadow: var(--shadow); position:relative; }
+.media-frame img { aspect-ratio: 4/3; object-fit: cover; }
+.media-frame.tall img { aspect-ratio: 4/5; }
+.gold-line { width: 72px; height: 2px; background: var(--gold); margin: 18px 0 22px; }
+.stats { display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+.stat { padding: 18px; border:1px solid rgba(17,17,15,.12); background: rgba(255,255,255,.38); }
+.stat b { display:block; font-size:1.6rem; font-family:'Playfair Display',serif; }
+.stat span { font-size:.78rem; color:#6f675b; text-transform:uppercase; letter-spacing:.1em; }
+
+.bike-strip { display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.bike-card { background: #151512; border: 1px solid rgba(211,179,122,.18); }
+.bike-card img { aspect-ratio: 4/2.7; object-fit: cover; filter: saturate(.82); }
+.bike-card-body { padding: 18px; }
+.bike-card-body small { color: var(--warm); text-transform:uppercase; letter-spacing:.16em; font-size:.65rem; }
+.bike-card-body h3 { margin: 8px 0; color: var(--white); }
+.bike-card-body p { color: var(--muted); font-size:.87rem; margin:0; }
+
+.quote-band { padding: 80px 0; background: linear-gradient(180deg,#12120f,#0d0d0b); border-top:1px solid rgba(255,255,255,.05); border-bottom:1px solid rgba(255,255,255,.05); text-align:center; }
+.quote-band blockquote { margin:0 auto; max-width: 900px; font-family:'Playfair Display',serif; font-size:clamp(2rem,4.5vw,4rem); }
+
+footer { padding: 35px 0; background:#0b0b09; color:#8d867a; font-size:.82rem; }
+.footer-row { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+
+/* Interior pages */
+.page-hero { padding: 160px 0 70px; background: radial-gradient(circle at top left, rgba(185,138,62,.13), transparent 34%), #10100e; }
+.page-hero h1 { max-width: 900px; margin-top: 10px; }
+.page-hero p { color: var(--muted); max-width: 700px; margin-top: 20px; }
+
+.bikes-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 22px; }
+.bike-panel { position:relative; overflow:hidden; background:#11110e; border:1px solid rgba(211,179,122,.17); }
+.bike-panel img { aspect-ratio: 16/10; object-fit:cover; transition:transform .5s ease; }
+.bike-panel:hover img { transform:scale(1.035); }
+.bike-panel .overlay { position:absolute; inset:auto 0 0; padding:24px; background:linear-gradient(0deg, rgba(6,6,5,.96), rgba(6,6,5,0)); }
+.bike-panel .overlay span { color:var(--warm); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; }
+.bike-panel .overlay h3 { margin-top:7px; }
+.bike-meta { display:flex; gap: 14px; flex-wrap:wrap; margin-top:10px; color:#c8c0b1; font-size:.8rem; }
+
+.accessories { display:grid; grid-template-columns: repeat(3,1fr); gap:14px; }
+.accessory {
+  border:1px solid rgba(211,179,122,.18); background:linear-gradient(160deg,rgba(211,179,122,.08),rgba(255,255,255,.015)); padding: 26px 20px;
+}
+.icon { width:48px; height:48px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--line); color:var(--warm); font-size:1.1rem; margin-bottom:18px; }
+.accessory p { color:var(--muted); font-size:.86rem; }
+.accessory ul { padding-left: 18px; color:#d8d0c2; font-size:.82rem; }
+
+.service-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:22px; }
+.service-card { padding:28px; border:1px solid rgba(211,179,122,.18); background:#12120f; }
+.service-card p { color:var(--muted); }
+.service-card .tag { display:inline-block; margin-top:12px; font-size:.72rem; color:var(--warm); letter-spacing:.12em; text-transform:uppercase; }
+
+.contact-grid { display:grid; grid-template-columns: .8fr 1.2fr; gap:22px; }
+.info-card, .form-card { background:#12120f; border:1px solid rgba(211,179,122,.18); padding:28px; }
+.info-list { display:grid; gap:18px; margin-top:24px; }
+.info-item small { color:var(--warm); text-transform:uppercase; letter-spacing:.13em; display:block; margin-bottom:3px; }
+.info-item span { color:#d7d0c3; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+label { display:block; margin-bottom:6px; font-size:.78rem; color:#bcb2a3; }
+input, textarea, select { width:100%; padding:13px 14px; border:1px solid rgba(211,179,122,.18); background:#0d0d0b; color:var(--white); outline:none; }
+input:focus, textarea:focus, select:focus { border-color: var(--gold); box-shadow:0 0 0 3px rgba(185,138,62,.12); }
+textarea { min-height: 130px; resize:vertical; }
+.full { grid-column:1 / -1; }
+.form-card .btn { border:0; cursor:pointer; width:max-content; }
+
+.gallery { display:grid; grid-template-columns: 1.3fr .7fr; gap:14px; }
+.gallery img { height:100%; object-fit:cover; }
+.gallery .big { min-height:520px; }
+.gallery .stack { display:grid; gap:14px; }
+.gallery .small { min-height:253px; }
+
+@media (max-width: 900px) {
+  .nav-links { position:absolute; top:78px; right:20px; left:20px; display:none; padding:18px; background:rgba(13,13,11,.98); border:1px solid rgba(211,179,122,.18); flex-direction:column; align-items:flex-start; }
+  .nav-links.open { display:flex; }
+  .menu-btn { display:block; }
+  .nav-cta { display:none; }
+  .hero-grid, .split, .contact-grid, .gallery { grid-template-columns:1fr; }
+  .hero-note { justify-self: start; margin-top:20px; }
+  .bike-strip, .bikes-grid, .accessories, .service-grid { grid-template-columns:1fr; }
+  .gallery .big, .gallery .small { min-height: 360px; }
+}
+@media (max-width: 620px) {
+  .container { width:min(100% - 28px,1180px); }
+  .nav { height:70px; }
+  .hero { padding-top:70px; min-height:92vh; }
+  .hero-content { padding:60px 0 55px; }
+  .section { padding:72px 0; }
+  .stats, .form-grid { grid-template-columns:1fr; }
+  .full { grid-column:auto; }
+  .page-hero { padding:130px 0 55px; }
+}
+
+
+/* ===== Bike catalogue upgrade ===== */
+.collection-intro {
+  display:grid; grid-template-columns:1fr .85fr; gap:36px; align-items:end;
+}
+.catalogue-board {
+  border:1px solid rgba(211,179,122,.22); background:#151512;
+  padding:12px; box-shadow:0 20px 60px rgba(0,0,0,.26); border-radius:18px;
+  margin-bottom:34px;
+}
+.catalogue-board img { border-radius:12px; max-height:520px; object-fit:cover; object-position:center; }
+.micro-note { color:#a99f91; font-size:.82rem; max-width:460px; }
+
+.bike-showcase-grid {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px;
+}
+.bike-showcase {
+  position:relative; overflow:hidden; min-height:345px; background:#0f0f0d;
+  border:1px solid rgba(255,255,255,.08); border-radius:18px;
+  box-shadow:0 16px 45px rgba(0,0,0,.25);
+}
+.bike-showcase img { height:350px; object-fit:cover; transition:transform .55s ease; }
+.bike-showcase::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(8,8,7,.92) 100%);
+}
+.bike-showcase:hover img { transform:scale(1.045); }
+.bike-copy { position:absolute; z-index:2; left:18px; right:18px; bottom:16px; }
+.bike-copy .tagline { color:#d3b37a; font-size:.72rem; text-transform:uppercase; letter-spacing:.14em; }
+.bike-copy h3 { margin:5px 0 6px; color:#f7f4ed; }
+.spec-row { display:flex; gap:8px; flex-wrap:wrap; }
+.spec-row span { border:1px solid rgba(211,179,122,.22); background:rgba(13,13,11,.6); border-radius:999px; padding:5px 9px; color:#d7d0c3; font-size:.72rem; }
+
+.section-title-row {
+  display:flex; justify-content:space-between; gap:25px; align-items:end; margin-bottom:28px;
+}
+.section-title-row p { max-width:530px; color:#a99f91; }
+
+.superbike-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.superbike-card {
+  position:relative; min-height:430px; overflow:hidden; border-radius:18px;
+  border:1px solid rgba(211,179,122,.2); background:#10100e;
+}
+.superbike-card img { height:430px; object-fit:cover; transition:transform .55s ease; }
+.superbike-card::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(8,8,7,.05) 30%, rgba(8,8,7,.94) 100%);
+}
+.superbike-card:hover img { transform:scale(1.05); }
+.superbike-overlay { position:absolute; z-index:2; left:22px; right:22px; bottom:20px; }
+.superbike-label { color:#d3b37a; font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; }
+.superbike-overlay h3 { font-size:2rem; margin:5px 0 6px; }
+.superbike-overlay p { margin:0; color:#cfc6b8; max-width:500px; font-size:.9rem; }
+
+.accessory-photo-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; margin-top:26px; }
+.accessory-photo {
+  overflow:hidden; background:#151512; border:1px solid rgba(255,255,255,.08); border-radius:16px;
+}
+.accessory-photo img { height:250px; object-fit:cover; transition:transform .45s ease; }
+.accessory-photo:hover img { transform:scale(1.04); }
+.accessory-photo .photo-info { padding:16px; }
+.accessory-photo .photo-info h3 { margin-bottom:5px; font-size:1.25rem; }
+.accessory-photo .photo-info p { margin:0; color:#a99f91; font-size:.85rem; }
+
+@media (max-width: 900px) {
+  .collection-intro { grid-template-columns:1fr; }
+  .bike-showcase-grid { grid-template-columns:repeat(2,1fr); }
+  .accessory-photo-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 620px) {
+  .bike-showcase-grid,.superbike-grid,.accessory-photo-grid { grid-template-columns:1fr; }
+  .bike-showcase img,.superbike-card img { height:320px; }
+  .accessory-photo img { height:230px; }
+}
+
+/* ===== Clean bikes page ===== */
+.bike-page-hero {
+  background:
+    radial-gradient(circle at 82% 15%, rgba(211,179,122,.10), transparent 30%),
+    radial-gradient(circle at 10% 75%, rgba(211,179,122,.06), transparent 26%),
+    #10100e;
+}
+.clean-bike-intro { align-items:center; margin-bottom:28px; }
+.bike-grid-clean { gap:22px; }
+.bike-grid-clean .bike-showcase { min-height:360px; background:#10100e; }
+.bike-grid-clean .bike-showcase img { height:360px; object-fit:cover; object-position:center; }
+.bike-grid-clean .bike-showcase:nth-child(7) { grid-column:2; }
+.superbike-clean-section { background:#e8e0d3; }
+.superbike-text-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.superbike-text-card {
+  position:relative; min-height:310px; padding:28px; overflow:hidden;
+  border:1px solid rgba(75,59,42,.22); border-radius:18px; background:linear-gradient(145deg,#f1eadf,#ded2c1);
+  box-shadow:0 16px 45px rgba(48,36,25,.10); transition:transform .25s ease, box-shadow .25s ease;
+}
+.superbike-text-card:hover { transform:translateY(-6px); box-shadow:0 24px 55px rgba(48,36,25,.16); }
+.superbike-number { position:absolute; top:14px; right:20px; font-family:'Playfair Display',serif; font-size:4rem; color:rgba(75,59,42,.10); line-height:1; }
+.superbike-text-card .superbike-label { color:#8f6327; margin-top:32px; }
+.superbike-text-card h3 { margin:7px 0 10px; font-size:2rem; color:#191712; }
+.superbike-text-card p { color:#655b4d; max-width:360px; }
+.dark-spec span { background:rgba(255,255,255,.44); border-color:rgba(75,59,42,.18); color:#51483d; }
+.supersport-note {
+  margin-top:24px; display:flex; justify-content:space-between; gap:20px; padding:18px 20px;
+  border:1px solid rgba(75,59,42,.18); border-radius:14px; background:rgba(255,255,255,.28); color:#62594c;
+}
+.supersport-note strong { color:#2b241c; }
+.bike-story-strip { border-top:1px solid rgba(211,179,122,.08); }
+@media (max-width: 900px) {
+  .bike-grid-clean .bike-showcase:nth-child(7) { grid-column:auto; }
+  .superbike-text-grid { grid-template-columns:1fr 1fr; }
+  .supersport-note { flex-direction:column; }
+}
+@media (max-width: 620px) {
+  .bike-grid-clean .bike-showcase img { height:320px; }
+  .superbike-text-grid { grid-template-columns:1fr; }
+}
+
+/* Essentials without unrelated stock photography */
+.gear-placeholder { background:linear-gradient(145deg,#171714,#0d0d0c); border-color:rgba(211,179,122,.18); }
+.gear-visual {
+  height:250px; display:grid; place-items:center; position:relative; overflow:hidden;
+  font-family:'Playfair Display',serif; font-size:2.2rem; letter-spacing:.18em; color:#d3b37a;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(211,179,122,.16), transparent 34%),
+    linear-gradient(135deg, rgba(255,255,255,.03), transparent 45%), #10100e;
+}
+.gear-visual::before { content:""; position:absolute; width:160px; height:160px; border:1px solid rgba(211,179,122,.22); border-radius:50%; }
+.gear-visual::after { content:""; position:absolute; width:240px; height:1px; background:rgba(211,179,122,.18); }
+.gear-placeholder .photo-info { color:#f6f1e7; }
+.gear-placeholder .photo-info h3 { color:#f6f1e7; }
+.gear-placeholder .photo-info p { color:#a99f91; }
